@@ -1,6 +1,5 @@
+import { mount } from "svelte";
 import App from './App.svelte';
-import tween from './tween.js';
-import * as eases from 'eases-jsnext';
 
 // Anything the end user can configure in the settings panel must
 // be in this object. The separate settings.js file references
@@ -12,15 +11,17 @@ export const state = {
 	color: "#FF0000"
 };
 
-let lastState = Object.assign( {}, state );
-let currentTween;
-let app;
+const props = $state({
+	radius: state.radius,
+	stroke: state.stroke,
+	color: state.color
+})
 
 // Initialise the graphic
 export function draw() {
-	app = new App({
+	mount(App, {
 		target: document.body,
-		props: state
+		props
 	});
 }
 
@@ -30,12 +31,7 @@ export function draw() {
 export function update() {
 	if (state.radius <= 0) throw new Error("Radius must be positive");
 
-	if ( currentTween ) currentTween.stop();
-	currentTween = tween( lastState, state, function ( state ) {
-		app.$set( state );
-		lastState = state;
-	}, {
-		duration: 400,
-		easing: eases.cubicInOut
-	});
+	props.radius = state.radius;
+	props.stroke = state.stroke;
+	props.color = state.color;
 }

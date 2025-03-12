@@ -1,9 +1,9 @@
-import nodeResolve from "@rollup/plugin-node-resolve";
 import svelte from "rollup-plugin-svelte";
-import uglify from 'rollup-plugin-uglify-es';
+import nodeResolve from "@rollup/plugin-node-resolve";
+import terser from "@rollup/plugin-terser";
 
 export default {
-  input: "src/index.js",
+  input: "src/index.svelte.js",
   output: {
     format: "iife",
     name: "template",
@@ -14,7 +14,9 @@ export default {
   // d3 relies on the node-resolve plugin
   plugins: [
     svelte(),
-    nodeResolve(),
-	uglify(),
-  ]
+    nodeResolve({
+      browser: true,
+    }),
+    terser(),
+  ],
 };

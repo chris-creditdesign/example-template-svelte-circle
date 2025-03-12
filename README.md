@@ -4,4 +4,4 @@ This sample template demonstrates how to implement the [circle example](https://
 
 Use the [Flourish SDK](https://www.npmjs.com/package/@flourish/sdk) to try it out.
 
-The main code file for the template is [`src/index.js`](src/index.js) and the app is [`src/App.svelte`](src/App.svelte).
+The main code file for the template is [`src/index.svelte.js`](src/index.svelte.js) and the app is [`src/App.svelte`](src/App.svelte).
